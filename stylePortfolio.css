@@ -1,6 +1,7 @@
 .links {
     color: blueviolet;
     background: aqua;
+    font-family: monospace;
 }
 
 
@@ -10,4 +11,24 @@ h1 {
 
 body {
     background-color: Aqua;
+}
+
+#web-contato {
+    color: rgb(75, 107, 11);
+}
+
+
+.tabela1 {
+    border-style: solid;
+}
+
+th {
+    color: rgb(162, 0, 255);
+    background-color: gold;
+    border-style: solid;
+}
+
+td {
+
+    border-style: solid;
 }
