@@ -1,0 +1,45 @@
+<!--Crie um html, onde é solicitado um valor inicial e final e apresenta a sequência de fibonacci após digitar um valor
+no segundo input. -->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>fibonacci</title>
+    <script>
+        function fibonacci() {
+            var termoInicial = parseInt(document.getElementById('numero').value);
+            var termo = parseInt(document.getElementById('numeroFinal').value);
+            var resposta = document.getElementById('resposta');
+            var penultimo = 0, ultimo = 1;
+            var numFinal;
+            var numInicial;
+
+            if (termo <= 2)
+                numFinal = termo - 1;
+            else {
+                count = 3;
+                while (count <= termo) {
+                    numFinal = ultimo + penultimo;
+                    penultimo = ultimo;
+                    ultimo = numFinal;
+                    count++;
+                }
+            }
+
+            resposta.innerHTML = numFinal;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Série Sibonacci</h1> <br>
+    Número inicial: <input id="numeroInicial" type="number">
+    <br>
+    Número final: <input id="numeroFinal" type="number">
+    <br>
+    <button onclick="fibonacci()">Exibir</button><br>
+    <div id='resposta'></div>
+</body>
+
+</html>

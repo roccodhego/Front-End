@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Exercicio 02 Element</title>
+    <script>
+        function sample() {
+            console.log("Cardápio")
+            var elem = document.getElementsByClassName("card-body");
+            elem.innerHTML = "Cardápio"; // escrever algo dentro do elemento
+
+        }
+
+    </script>
+</head>
+
+<body onload="sample()">
+    <div class="card" style="width: 18rem;">
+        <img src="https://cdn.kastatic.org/third_party/javascript-khansrc/live-editor/build/images/avatars/avatar-team.png"
+            class="card-img-top" alt="Grupo de bichinhos">
+
+
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
