@@ -4,8 +4,32 @@
     <title>Calculadora</title>
     <link rel="stylesheet" href="styleCaluladora.css">
 </head>
+<script>
+    let selectoperation
+    let resultado = ''
+    function operacao(op) {
+        selectoperation = op
+        document.getElementById("resultado").value = resultado
+        resultado = valordigitado
+        valordigitado = ''
+    }
+
+    let valordigitado = ''
+    function valores(valor) {
+        valordigitado += valor
+        document.getElementById("resultado").value = valordigitado
+    }
+
+    function calcular() {
+        const soma = parseInt(valordigitado) + parseInt(resultado)
+
+        document.getElementById("resultado").value = soma
+    }
+
+</script>
 
 <body>
+
     <div class="fundo">
         <h1>Moura</h1>
         <div class="calculadora">
