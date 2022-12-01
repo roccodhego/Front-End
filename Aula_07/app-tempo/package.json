@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.0.0",
-    "@angular/cdk": "^15.0.0",
+    "@angular/cdk": "^15.0.1",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",
@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",
-    "@angular/cli": "~15.0.0",
-    "@angular/compiler-cli": "^15.0.0",
+    "@angular/cli": "~15.0.2",
+    "@angular/compiler-cli": "^15.0.2",
     "@types/jasmine": "~4.3.0",
     "dev-norms": "1.7.2",
     "jasmine-core": "~4.5.0",
