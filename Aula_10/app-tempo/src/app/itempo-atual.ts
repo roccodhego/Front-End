@@ -4,5 +4,7 @@ export interface ITempoAtual {
   date: string,
   image: string,
   temperatura: number,
-  descricao: string
+  descricao: string,
+  latitude: number,
+  longitude: number
 }

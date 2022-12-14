@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { debounceTime, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ITempoAtual } from '../itempo-atual';
 
@@ -9,7 +9,28 @@ import { ITempoAtual } from '../itempo-atual';
 })
 export class TempoService {
 
-  constructor(private httpClient: HttpClient) { }
+
+  tempoAtual: BehaviorSubject<ITempoAtual> = new BehaviorSubject<ITempoAtual>({
+    cidade: '',
+    pais: '',
+    date: Date.now().toLocaleString(),
+    descricao: '',
+    temperatura: 0,
+    image: '',
+    latitude: 0,
+    longitude: 0
+  })
+
+  poluicaoAtual: BehaviorSubject<PolutionData> = new BehaviorSubject<PolutionData>({
+    airquality: '',
+    periodcelements: [],
+  })
+
+
+  constructor(private httpClient: HttpClient) {
+
+  }
+
 
   buscarTempoAtual(busca: string | number, pais: string): Observable<ITempoAtual> {
 
@@ -30,15 +51,15 @@ export class TempoService {
     ).pipe(map(data => this.transformToITempoAtual(data)))
   }
 
-  buscarPoluicao (lat: string, lon: string): Observable<PolutionData>{
-//http://api.openweathermap.org/data/2.5/air_pollution?lat=-27.8165664&lon=-50.325883&appid=bc93fb691907d0c9163732716afcb58d
+  buscarPoluicao(lat: number, lon: number): Observable<PolutionData> {
+    //http://api.openweathermap.org/data/2.5/air_pollution?lat=-27.8165664&lon=-50.325883&appid=bc93fb691907d0c9163732716afcb58d
     return this.httpClient.get<IcurrentPolutionData>(
       `${environment.baseUrl}api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${environment.appId}`
-    ).pipe(map (data => this.transformToPolutionData(data)))
-
+    ).pipe(map(data => this.transformToPolutionData(data)))
   }
 
   private transformToITempoAtual(data: ICurrentWeatherData): ITempoAtual {
+    console.log(data)
     return {
       cidade: data.name,
       pais: data.sys.country,
@@ -46,15 +67,16 @@ export class TempoService {
       descricao: data.weather[0].description,
       temperatura: this.convertKelvinToCelcius(data.main.temp),
       image: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
+      latitude: data.coord.lat,
+      longitude: data.coord.lon
     }
   }
 
-  private transformToPolutionData(data: IcurrentPolutionData): PolutionData{
+  private transformToPolutionData(data: IcurrentPolutionData): PolutionData {
     let airquality = "Good"
-    switch(data.list[0].main.aqi)
-    {
+    switch (data.list[0].main.aqi) {
       case 2: {
-        airquality= "Fair"
+        airquality = "Fair"
         break
       }
       case 3: {
@@ -62,21 +84,21 @@ export class TempoService {
         break
       }
       case 4: {
-        airquality= "Poor"
+        airquality = "Poor"
         break
       }
-      case 5:{
-        airquality= "Very Poor"
+      case 5: {
+        airquality = "Very Poor"
         break
       }
-      default:{
+      default: {
         airquality = "Good"
       }
     }
-    
-    return{
-      airquality, 
-      periodcelements: [{name: "Carbono", weight: data.list[0].components["co"].toString(), position: 1, symbol: "co" }]
+
+    return {
+      airquality,
+      periodcelements: [{ name: "Carbono", weight: data.list[0].components["co"].toString(), position: 1, symbol: "co" }]
     }
   }
   private convertKelvinToCelcius(kelvin: number): number {
@@ -87,6 +109,7 @@ export class TempoService {
 }
 
 interface ICurrentWeatherData {
+  coord: { lon: number, lat: number },
   weather: [{ description: string, icon: string }],
   main: { temp: number },
   sys: { country: string },
@@ -95,13 +118,13 @@ interface ICurrentWeatherData {
 }
 
 
-  //{"coord":{"lon":-50.3259,"lat":-27.8166},"list":[{"main":{"aqi":1},"components":{"co":178.58,"no":0,"no2":1.63,"o3":19.67,"so2":0.75,"pm2_5":0.5,"pm10":0.8,"nh3":0.37},"dt":1669762571}]}
-  
+//{"coord":{"lon":-50.3259,"lat":-27.8166},"list":[{"main":{"aqi":1},"components":{"co":178.58,"no":0,"no2":1.63,"o3":19.67,"so2":0.75,"pm2_5":0.5,"pm10":0.8,"nh3":0.37},"dt":1669762571}]}
 
 
-export interface IcurrentPolutionData{
+
+export interface IcurrentPolutionData {
   coord: Coord;
-  list:  List[];
+  list: List[];
 }
 
 export interface Coord {
@@ -110,9 +133,9 @@ export interface Coord {
 }
 
 export interface List {
-  main:       Main;
+  main: Main;
   components: { [key: string]: number };
-  dt:         number;
+  dt: number;
 }
 
 export interface Main {
@@ -126,7 +149,7 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-export interface PolutionData{
+export interface PolutionData {
   airquality: string;
   periodcelements: PeriodicElement[];
 

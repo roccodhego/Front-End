@@ -1,41 +1,27 @@
+# Tempo
 
-# Front-End
-Repositório feito com a turma de jovem programador
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
-#App-Tempo
+## Development server
 
-Um projeto criado para verificação do tempo e puição do ar.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Este projeto foi gerado com [ Angular CLI ](https://github.com/angular/angular-cli) versão 15.0.2.
+## Code scaffolding
 
-## Instalação
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Clone o projeto
+## Build
 
-```bash
-  https://github.com/roccodhego/Front-End.git
-```
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-Entre no diretório do projeto
+## Running unit tests
 
-```bash
-  cd Front-End/Aula_10/app-tempo/
-```
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Instale as dependências
+## Running end-to-end tests
 
-```bash
-  npm install
-```
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-##  Execução
+## Further help
 
-Execute `ng serve -o` compila, executa a aplicação e já abre o navegador com a aplicação rodando. Se preferir basta acessar no navegador `http://localhost:4200/` .
-
-
-##  Mais ajuda
-
-Para obter mais ajuda sobre o Angular CLI, use `ng help` ou confira a página [ Angular CLI Overview and Command Reference ](https://angular.io/cli).
-
-## Autores
-- [@roccodhego](https://github.com/roccodhego) (github).
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
